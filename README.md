@@ -24,6 +24,7 @@ Boots via **GRUB (Multiboot v1)**, sets up **GDT/IDT**, remaps the **PIC**, inst
 > Replace this with your own screenshot from QEMU.
 
 ![QEMU screenshot showing kernel output](docs/screenshot.png)
+mini%20os%20screenshot.png 
 
 Typical output:
 
