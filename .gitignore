@@ -1,0 +1,20 @@
+# Build artifacts
+build/
+iso/
+mini-os.iso
+qemu.log
+
+# Compiled objects / deps
+*.o
+*.d
+*.elf
+*.map
+*.lst
+*.bin
+
+# Editor/OS clutter
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
