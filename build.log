@@ -1,0 +1,16 @@
+mkdir -p build
+gcc -m32 -c -o build/boot.o boot/boot.s
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/kernel.o kernel/kernel.c
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/idt.o kernel/idt.c
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/isr.o kernel/isr.c
+gcc -m32 -c -o build/isr_stubs.o kernel/isr_stubs.s
+gcc -m32 -c -o build/idt_load.o kernel/idt_load.s
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/pic.o kernel/pic.c
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/irq.o kernel/irq.c
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/timer.o kernel/timer.c
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/vga.o kernel/vga.c
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/keyboard.o kernel/keyboard.c
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/gdt.o kernel/gdt.c
+gcc -m32 -c -o build/gdt_flush.o kernel/gdt_flush.s
+gcc -c -m32 -ffreestanding -nostdlib -fno-pic -fno-pie -Wall -Wextra -o build/paging.o kernel/paging.c
+ld -m elf_i386 -T linker.ld -o build/kernel.bin build/boot.o build/kernel.o build/idt.o build/isr.o build/isr_stubs.o build/idt_load.o build/pic.o build/irq.o build/timer.o build/vga.o build/keyboard.o build/gdt.o build/gdt_flush.o build/paging.o
