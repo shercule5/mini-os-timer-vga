@@ -19,22 +19,6 @@ Boots via **GRUB (Multiboot v1)**, sets up **GDT/IDT**, remaps the **PIC**, inst
 
 ---
 
-## 📸 Screenshot
-
-> Replace this with your own screenshot from QEMU.
-
-![QEMU screenshot showing kernel output](docs/screenshot.png)
-mini%20os%20screenshot.png https://docs.google.com/document/d/1kfCxShD7DIjPxDk7JasIKrZe2lQLJf7UGc3_9xKWvUI/edit?usp=sharing
-
-Typical output:
-
-kmain: hello from C
-soft-uptime: 1s
-soft-uptime: 2s
-...
-
-
-If you enable real IRQs/timer in `kernel/kernel.c`, you’ll see:
 
 
 kernel: timer online, printing every 1s...
@@ -57,7 +41,7 @@ uptime: 1s
 
 ---
 
-## 🚀 Build & Run
+## Build & Run
 
 ```bash
 make           # builds kernel + ISO
@@ -73,7 +57,7 @@ Sanity checks:
 grub-file --is-x86-multiboot build/kernel.bin && echo "OK multiboot"
 xorriso -indev mini-os.iso -report_el_torito as_mkisofs | sed -n '1,80p'
 
-🧠 How It Works (quick tour)
+How It Works (quick tour)
 
 Boot: GRUB sees the .multiboot header and loads the ELF at 1 MiB.
 
@@ -85,7 +69,7 @@ Interrupts: IRQ0 (timer) fires at 100 Hz; the C handler counts ticks and prints 
 
 Output: Print is direct to 0xB8000 in VGA text mode (no libc).
 
-🧪 Enabling/Disabling IRQs
+Enabling/Disabling IRQs
 
 To avoid triple-faults while wiring your IDT/IRQ stubs, the kernel ships with a safe mode:
 
@@ -118,7 +102,7 @@ WSL users: run everything inside WSL; mixing Windows paths into the build can br
 
 MIT — do whatever helps you learn, just keep the notice.
 
-🙌 Credits / Notes
+Credits / Notes
 
 Built following classic OSDev patterns and docs.
 
@@ -127,8 +111,5 @@ QEMU + GRUB tooling makes iteration fast and reproducible.
 Educational project; not intended for production.
 
 
----
-
-If you want, I can also generate a tiny **docs/screenshot.png** instruction (how to capture and add it) or tweak the README to match exactly what you’ve enabled (soft heartbeat vs. real timer).
 
 
